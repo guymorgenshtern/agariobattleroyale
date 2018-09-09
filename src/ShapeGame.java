@@ -1,14 +1,16 @@
 /**
-* This template can be used as reference or a starting point for the Shape Game
+* This template can be used as reference or a starting point for the Shape Game 
 * for your final summative project
 * @author Mangat
 **/
 
 //Graphics &GUI imports
 import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 import java.awt.Toolkit;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.Color;
   
 //Keyboard imports
@@ -39,9 +41,17 @@ class ShapeGameTemplate extends JFrame {
   ShapeGameTemplate() { 
     super("My Game");  
     
+    Rectangle rect = new Rectangle();
+    
     //create enemies and player
-
+    Player newplayer = new Player(1, 1, rect, 1);
+  
     //spawn 5 eneimies
+    Enemy enemy1 = new Enemy(1, 1, rect, 1, 1);
+    Enemy enemy2 = new Enemy(1, 1, rect, 1, 1);
+    Enemy enemy3 = new Enemy(1, 1, rect, 1, 1);
+    Enemy enemy4 = new Enemy(1, 1, rect, 1, 1);
+    Enemy enemy5 = new Enemy(1, 1, rect, 1, 1);
 
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,6 +119,8 @@ class ShapeGameTemplate extends JFrame {
         //System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
        
         if (KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {  //If 'D' is pressed
+        		
+        		
   
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {  //If ESC is pressed
           System.out.println("Quitting!"); //close frame & quit
