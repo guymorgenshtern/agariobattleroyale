@@ -1,3 +1,7 @@
+/*
+ * @author Yash Arora
+ */
+
 import java.awt.Rectangle;
 
 public class Circle extends Shape{
