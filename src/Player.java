@@ -8,8 +8,7 @@ public class Player extends Circle implements Scalable, Moveable{
 
 	@Override
 	public void grow() {
-		// TODO Auto-generated method stub
-		
+		this.setRadius(this.getRadius() + 10);
 	}
 
 	@Override
@@ -20,26 +19,22 @@ public class Player extends Circle implements Scalable, Moveable{
 
 	@Override
 	public void moveUp() {
-		// TODO Auto-generated method stub
-		
+		this.setY(this.getY() - 0.1);
 	}
 
 	@Override
 	public void moveDown() {
-		// TODO Auto-generated method stub
-		
+		this.setY(this.getY() + 0.1);		
 	}
 
 	@Override
 	public void moveLeft() {
-		// TODO Auto-generated method stub
-		
+		this.setX(this.getX() - 0.1);		
 	}
 
 	@Override
 	public void moveRight() {
-		// TODO Auto-generated method stub
-		
+		this.setX(this.getX() + 0.1);
 	}
 
 }
