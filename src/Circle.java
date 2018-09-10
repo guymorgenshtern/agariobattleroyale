@@ -2,15 +2,16 @@
  * @author Yash Arora
  */
 
-import java.awt.Rectangle;
 
 public class Circle extends Shape{
 	
 	private double radius;
 
-	Circle(double x, double y, Rectangle boundingBox, double radius) {
-		super(x, y, boundingBox);
+	Circle(double x, double y, double radius) {
+		super(x, y);
 		this.radius = radius;
+		this.getBoundingBox().setBounds((int) x, (int) y, (int) radius*2, (int) radius*2);
+
 	}
 	
 	@Override

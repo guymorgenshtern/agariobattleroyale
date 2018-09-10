@@ -1,12 +1,11 @@
-import java.awt.Rectangle;
 
 public class Square extends Shape{
 
 	private double height;
 	private double width;
 
-	Square(double x, double y, Rectangle boundingBox, double height, double width) {
-		super(x, y, boundingBox);
+	Square(double x, double y, double height, double width) {
+		super(x, y);
 		this.height = height;
 		this.width = width;
 	}

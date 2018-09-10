@@ -31,8 +31,10 @@ class ShapeGameTemplate extends JFrame {
   //comment;
   
   Player player;
-  Enemy enemy1;
   boolean[] move = new boolean[4];
+  static int numberOfEnemies = 5;
+  
+  ArrayList<Enemy> enemies =  new ArrayList<Enemy>();
   
 
   
@@ -48,18 +50,23 @@ class ShapeGameTemplate extends JFrame {
   //Constructor - this runs first
   ShapeGameTemplate() {
     super("AGARIO BATTLE ROYALE!");  
+    
     for (int i = 0; i < 4; i++) {
   	  move[i] = false;
     }
     
-    Rectangle rect = new Rectangle();
+
+    
     
     //create enemies and player
-    player = new Player(50, 50, rect, 20);
+    player = new Player(50, 50, 20);
   
-    //spawn 5 eneimies
-    enemy1 = new Enemy(1, 1, rect, 1, 1);
-
+    //spawn 5 enemies
+    for(int i = 0; i < numberOfEnemies; i++) {
+		int spawnX = (int) (Math.random() * 600);
+		int spawnY = (int) (Math.random() * 400);
+		enemies.add(new Enemy(spawnX, spawnY, 20, 20)); 
+    }
 
     // Set the frame to full screen 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,44 +102,69 @@ class ShapeGameTemplate extends JFrame {
        super.paintComponent(g); //required
        setDoubleBuffered(true); 
 
-      
        
+	   for(int i = 0; i < enemies.size(); i++) {
+       
+	       double rand = Math.random();
+	       if (rand < 0.25) {
+		    	    	enemies.get(i).moveRight();
+	       } else if (rand < 0.5) {
+		    		   enemies.get(i).moveLeft();
+	       } else if (rand < 0.75) {
+			    		enemies.get(i).moveUp();
+	       } else {
+		    		   enemies.get(i).moveDown();
+	       }
+	       
+	   }
        
        
        //move enemies
        //System.out.println(enemy1.getBoundingBox().getCenterX() + " " + enemy1.getBoundingBox().getCenterY());
        //System.out.println(player.getBoundingBox().getCenterX() + " " + player.getBoundingBox().getCenterY());
 
-       if (player.getBoundingBox().intersects(enemy1.getBoundingBox())) {
-    	   		player.grow();
-       }
+//       if (player.getBoundingBox().intersects(enemy1.getBoundingBox())) {
+//    	   		player.grow();
+//       }
        
        //check for collision
-       
+ 
        
        
        
        //draw all squares
        
        
-      
-       g.fillRect(400,400,100,100);
-       
-	       if (move[0]) {
-	    	   		player.moveUp();	       
-	       } else if (move[1]){
-		   		player.moveLeft();
-	       } else if (move[2]){
-		   		player.moveDown();
-	       } else if (move[3]){
-		   		player.moveRight();
-	       }
+             
+	   if (move[0]) {
+	    	   	player.moveUp();	       
+	   } else if (move[1]){
+		   	player.moveLeft();
+	   } else if (move[2]){
+		   	player.moveDown();
+	   } else if (move[3]){
+		   	player.moveRight();
+	   }
 
        
        
-       g.setColor(Color.BLUE);
+       
+       
+       // DRAW Enemy
+	   g.setColor(Color.BLUE);
        g.fillOval((int) player.getX(), (int) player.getY(), (int) player.getRadius(), (int) player.getRadius()); 
-
+       
+       // DRAW Enemy
+       g.setColor(Color.RED);
+       
+       for (int i = 0; i < enemies.size(); i++) {
+    	   		g.fillRect((int) enemies.get(i).getX(), (int) enemies.get(i).getY(), (int) enemies.get(i).getWidth(), (int) enemies.get(i).getHeight()); 
+    	        if (player.getBoundingBox().intersects(enemies.get(i).getBoundingBox())) {
+    	        		enemies.remove(i);
+        	   		player.grow();
+    	        }
+       }
+       
        repaint();
     }
   }
@@ -144,7 +176,7 @@ class ShapeGameTemplate extends JFrame {
       }
 
       public void keyPressed(KeyEvent e) {
-        System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
+        // System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
        
         if (KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {  //If 'A' is pressed
         		move[0] = true;	

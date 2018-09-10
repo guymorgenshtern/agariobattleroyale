@@ -1,33 +1,37 @@
-import java.awt.Rectangle;
 
 public class Enemy extends Square implements Moveable{
 
-	Enemy(double x, double y, Rectangle boundingBox, double height, double width) {
-		super(x, y, boundingBox, height, width);
+	Enemy(double x, double y, double height, double width) {
+		super(x, y, height, width);
+		this.getBoundingBox().setBounds((int) x, (int) y, (int) width, (int) height);
+
 	}
 
 	@Override
 	public void moveUp() {
-		// TODO Auto-generated method stub
-		
+   		this.setY(this.getY() - 0.3);
+   		this.getBoundingBox().setLocation((int)this.getX(), (int) this.getY());
 	}
 
 	@Override
 	public void moveDown() {
-		// TODO Auto-generated method stub
-		
+   		this.setY(this.getY() + 0.3);
+   		this.getBoundingBox().setLocation((int)this.getX(), (int) this.getY());
+
 	}
 
 	@Override
 	public void moveLeft() {
-		// TODO Auto-generated method stub
-		
+   		this.setX(this.getX() - 0.3);
+   		this.getBoundingBox().setLocation((int)this.getX(), (int) this.getY());
+
 	}
 
 	@Override
 	public void moveRight() {
-		// TODO Auto-generated method stub
-		
+   		this.setX(this.getX() + 0.3);
+   		this.getBoundingBox().setLocation((int)this.getX(), (int) this.getY());
+
 	}
 
 }

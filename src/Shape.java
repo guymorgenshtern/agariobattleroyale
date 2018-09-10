@@ -4,12 +4,11 @@ public abstract class Shape {
 
 	private double x;
 	private double y;
-	private Rectangle boundingBox;
+	private Rectangle boundingBox = new Rectangle();
 	
-	Shape(double x, double y, Rectangle boundingBox) {
+	Shape(double x, double y) {
 		this.x = x;
 		this.y = y;
-		this.boundingBox = boundingBox;
 	}
 	
 	public double getX() {
@@ -27,6 +26,7 @@ public abstract class Shape {
 	public Rectangle getBoundingBox() {
 		return boundingBox;
 	}
+		
 	abstract public double getArea();
 	
 }
