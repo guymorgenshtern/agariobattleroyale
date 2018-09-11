@@ -32,8 +32,10 @@ class ShapeGameTemplate extends JFrame {
   
   Player player;
   boolean[] move = new boolean[4];
-  static int numberOfEnemies = 5;
+  static int numberOfEnemies = 7;
+  int count = 0;
   
+  ArrayList<Double> rand = new ArrayList<Double>();
   ArrayList<Enemy> enemies =  new ArrayList<Enemy>();
   
 
@@ -63,8 +65,8 @@ class ShapeGameTemplate extends JFrame {
   
     //spawn 5 enemies
     for(int i = 0; i < numberOfEnemies; i++) {
-		int spawnX = (int) (Math.random() * 600);
-		int spawnY = (int) (Math.random() * 400);
+		int spawnX = (int) (Math.random() * 700);
+		int spawnY = (int) (Math.random() * 500);
 		enemies.add(new Enemy(spawnX, spawnY, 20, 20)); 
     }
 
@@ -101,16 +103,22 @@ class ShapeGameTemplate extends JFrame {
     public void paintComponent(Graphics g) {   
        super.paintComponent(g); //required
        setDoubleBuffered(true); 
-
+       
+       count++;
+       
+       
+	   if (count % 60 == 0) {
+		   for(int i = 0; i < enemies.size(); i++) {
+			   enemies.get(i).setDirection(Math.random());
+		   }
+	   }
        
 	   for(int i = 0; i < enemies.size(); i++) {
-       
-	       double rand = Math.random();
-	       if (rand < 0.25) {
+	       if (enemies.get(i).getDirection() < 0.25) {
 		    	    	enemies.get(i).moveRight();
-	       } else if (rand < 0.5) {
+	       } else if (enemies.get(i).getDirection() < 0.5) {
 		    		   enemies.get(i).moveLeft();
-	       } else if (rand < 0.75) {
+	       } else if (enemies.get(i).getDirection() < 0.75) {
 			    		enemies.get(i).moveUp();
 	       } else {
 		    		   enemies.get(i).moveDown();
@@ -118,6 +126,11 @@ class ShapeGameTemplate extends JFrame {
 	       
 	   }
        
+       if (count%60 == 0) {
+    	   
+       }
+       
+
        
        //move enemies
        //System.out.println(enemy1.getBoundingBox().getCenterX() + " " + enemy1.getBoundingBox().getCenterY());
@@ -167,6 +180,7 @@ class ShapeGameTemplate extends JFrame {
        
        repaint();
     }
+   
   }
   
   // -----------  Inner class for the keyboard listener - this detects key presses and runs the corresponding code
